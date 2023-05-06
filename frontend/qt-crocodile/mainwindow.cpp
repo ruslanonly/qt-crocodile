@@ -16,3 +16,13 @@ MainWindow::~MainWindow()
 }
 
 
+
+void MainWindow::on_sendWordButton_clicked()
+{
+
+}
+
+
+void MainWindow::showWindow() {
+    this->show();
+}

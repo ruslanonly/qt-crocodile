@@ -19,6 +19,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void showWindow();
+
+private slots:
+    void on_sendWordButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
