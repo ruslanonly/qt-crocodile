@@ -16,6 +16,7 @@ Game::Game(Server *server)
 void Game::waitGame(QTcpSocket* socket) {
     if (isGameRunning) {
         server->sendMessage(socket, Guesser);
+        server->sendMessage(socket, UpdateImage, *currentImage);
         return;
     }
 
