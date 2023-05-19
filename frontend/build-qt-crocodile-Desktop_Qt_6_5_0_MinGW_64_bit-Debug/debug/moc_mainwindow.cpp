@@ -41,15 +41,29 @@ static constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers:
     "MainWindow",
     "showWindow",
     "",
-    "on_sendWordButton_clicked"
+    "Username",
+    "readSocket",
+    "displayError",
+    "QAbstractSocket::SocketError",
+    "socketError",
+    "discardSocket",
+    "on_sendWordButton_clicked",
+    "onMouseUpSlot"
 );
 #else  // !QT_MOC_HAS_STRING_DATA
 struct qt_meta_stringdata_CLASSMainWindowENDCLASS_t {
-    uint offsetsAndSizes[8];
+    uint offsetsAndSizes[22];
     char stringdata0[11];
     char stringdata1[11];
     char stringdata2[1];
-    char stringdata3[26];
+    char stringdata3[9];
+    char stringdata4[11];
+    char stringdata5[13];
+    char stringdata6[29];
+    char stringdata7[12];
+    char stringdata8[14];
+    char stringdata9[26];
+    char stringdata10[14];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_CLASSMainWindowENDCLASS_t::offsetsAndSizes) + ofs), len 
@@ -58,12 +72,26 @@ Q_CONSTINIT static const qt_meta_stringdata_CLASSMainWindowENDCLASS_t qt_meta_st
         QT_MOC_LITERAL(0, 10),  // "MainWindow"
         QT_MOC_LITERAL(11, 10),  // "showWindow"
         QT_MOC_LITERAL(22, 0),  // ""
-        QT_MOC_LITERAL(23, 25)   // "on_sendWordButton_clicked"
+        QT_MOC_LITERAL(23, 8),  // "Username"
+        QT_MOC_LITERAL(32, 10),  // "readSocket"
+        QT_MOC_LITERAL(43, 12),  // "displayError"
+        QT_MOC_LITERAL(56, 28),  // "QAbstractSocket::SocketError"
+        QT_MOC_LITERAL(85, 11),  // "socketError"
+        QT_MOC_LITERAL(97, 13),  // "discardSocket"
+        QT_MOC_LITERAL(111, 25),  // "on_sendWordButton_clicked"
+        QT_MOC_LITERAL(137, 13)   // "onMouseUpSlot"
     },
     "MainWindow",
     "showWindow",
     "",
-    "on_sendWordButton_clicked"
+    "Username",
+    "readSocket",
+    "displayError",
+    "QAbstractSocket::SocketError",
+    "socketError",
+    "discardSocket",
+    "on_sendWordButton_clicked",
+    "onMouseUpSlot"
 };
 #undef QT_MOC_LITERAL
 #endif // !QT_MOC_HAS_STRING_DATA
@@ -75,7 +103,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
       11,       // revision
        0,       // classname
        0,    0, // classinfo
-       2,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -83,10 +111,18 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   26,    2, 0x0a,    1 /* Public */,
-       3,    0,   27,    2, 0x08,    2 /* Private */,
+       1,    1,   50,    2, 0x0a,    1 /* Public */,
+       4,    0,   53,    2, 0x0a,    3 /* Public */,
+       5,    1,   54,    2, 0x0a,    4 /* Public */,
+       8,    0,   57,    2, 0x0a,    6 /* Public */,
+       9,    0,   58,    2, 0x08,    7 /* Private */,
+      10,    0,   59,    2, 0x08,    8 /* Private */,
 
  // slots: parameters
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 6,    7,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -104,7 +140,17 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'showWindow'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        // method 'readSocket'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'displayError'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<QAbstractSocket::SocketError, std::false_type>,
+        // method 'discardSocket'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_sendWordButton_clicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'onMouseUpSlot'
         QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
@@ -116,12 +162,26 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<MainWindow *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: _t->showWindow(); break;
-        case 1: _t->on_sendWordButton_clicked(); break;
+        case 0: _t->showWindow((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
+        case 1: _t->readSocket(); break;
+        case 2: _t->displayError((*reinterpret_cast< std::add_pointer_t<QAbstractSocket::SocketError>>(_a[1]))); break;
+        case 3: _t->discardSocket(); break;
+        case 4: _t->on_sendWordButton_clicked(); break;
+        case 5: _t->onMouseUpSlot(); break;
         default: ;
         }
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        switch (_id) {
+        default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+        case 2:
+            switch (*reinterpret_cast<int*>(_a[1])) {
+            default: *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType(); break;
+            case 0:
+                *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType::fromType< QAbstractSocket::SocketError >(); break;
+            }
+            break;
+        }
     }
-    (void)_a;
 }
 
 const QMetaObject *MainWindow::metaObject() const
@@ -143,13 +203,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
-            *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        if (_id < 6)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 6;
     }
     return _id;
 }

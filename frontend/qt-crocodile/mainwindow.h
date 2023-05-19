@@ -5,10 +5,13 @@
 #include <QMainWindow>
 #include <paintscene.h>
 #include <QTimer>
+#include <QBuffer>
+#include <QTcpSocket>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
+
 
 class MainWindow : public QMainWindow
 
@@ -19,15 +22,41 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    enum MessageCodes {
+        Guess = 1,
+        UpdateImage,
+        GameStarted,
+        GameEnded,
+        Drawer,
+        Guesser,
+        WrongAnswer,
+        SetNickname
+    };
+
 public slots:
-    void showWindow();
+    void showWindow(QString Username);
+
+    void readSocket();
+    void displayError(QAbstractSocket::SocketError socketError);
+    void discardSocket();
 
 private slots:
     void on_sendWordButton_clicked();
+    void onMouseUpSlot();
 
 private:
+    QBuffer* exportGraphicsView();
+    void updateGraphicsView(QBuffer* buffer);
+    void openConnection();
+
+    void sendMessage(MessageCodes messageCode, QByteArray qArray);
+
     Ui::MainWindow *ui;
+
+    QString Username;
     PaintScene *scene;
+
+    QTcpSocket* socket;
 };
 
 #endif // MAINWINDOW_H

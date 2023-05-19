@@ -15,7 +15,7 @@ LoginModal::~LoginModal()
 
 void LoginModal::on_loginButton_clicked()
 {
-    emit this->loginedSignal();
+    emit this->loginedSignal(this->ui->usernameInput->text());
     this->close();
 }
 

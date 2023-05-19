@@ -15,12 +15,15 @@ public:
     explicit PaintScene(QObject *parent = 0);
     ~PaintScene();
 
+signals:
+    mouseUpEvent();
 private:
     QPointF previousPoint;
 
 private:
     void mousePressEvent(QGraphicsSceneMouseEvent * event);
     void mouseMoveEvent(QGraphicsSceneMouseEvent *event);
+    void mouseReleaseEvent(QGraphicsSceneMouseEvent *event);
 
 };
 

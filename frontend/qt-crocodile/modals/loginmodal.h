@@ -15,7 +15,7 @@ public:
     explicit LoginModal(QWidget *parent = nullptr);
     ~LoginModal();
 signals:
-    void loginedSignal();
+    void loginedSignal(QString username);
 
 private slots:
     void on_loginButton_clicked();

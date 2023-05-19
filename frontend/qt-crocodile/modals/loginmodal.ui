@@ -80,7 +80,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="usernameInput_s"/>
+            <widget class="QLineEdit" name="usernameInput"/>
            </item>
           </layout>
          </item>

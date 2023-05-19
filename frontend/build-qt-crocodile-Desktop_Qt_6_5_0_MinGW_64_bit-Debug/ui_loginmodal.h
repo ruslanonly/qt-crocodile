@@ -32,7 +32,7 @@ public:
     QVBoxLayout *inputsLayout_2;
     QVBoxLayout *inputGroup_3;
     QLabel *usernameLabel_2;
-    QLineEdit *usernameInput_s;
+    QLineEdit *usernameInput;
     QSpacerItem *verticalSpacer_3;
     QPushButton *loginButton;
     QSpacerItem *horizontalSpacer_4;
@@ -75,10 +75,10 @@ public:
 
         inputGroup_3->addWidget(usernameLabel_2);
 
-        usernameInput_s = new QLineEdit(LoginModal);
-        usernameInput_s->setObjectName("usernameInput_s");
+        usernameInput = new QLineEdit(LoginModal);
+        usernameInput->setObjectName("usernameInput");
 
-        inputGroup_3->addWidget(usernameInput_s);
+        inputGroup_3->addWidget(usernameInput);
 
 
         inputsLayout_2->addLayout(inputGroup_3);
