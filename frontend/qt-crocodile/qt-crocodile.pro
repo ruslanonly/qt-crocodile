@@ -11,11 +11,13 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    modals/loginmodal.cpp
+    modals/loginmodal.cpp \
+    paintscene.cpp
 
 HEADERS += \
     mainwindow.h \
-    modals/loginmodal.h
+    modals/loginmodal.h \
+    paintscene.h
 
 FORMS += \
     mainwindow.ui \

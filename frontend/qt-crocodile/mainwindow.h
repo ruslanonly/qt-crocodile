@@ -3,8 +3,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-
+#include <paintscene.h>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -27,6 +27,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    PaintScene *scene;
 };
 
 #endif // MAINWINDOW_H
