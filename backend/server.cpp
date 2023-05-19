@@ -72,7 +72,7 @@ void Server::sendMessage(QTcpSocket* socket, int code, QByteArray message)
             QByteArray byteArray = message;
             byteArray.prepend(header);
 
-            qDebug() << socket->socketDescriptor();
+            qDebug() << socket->socketDescriptor() << " " << code;
 
             socketStream.setVersion(QDataStream::Qt_5_15);
             socketStream << byteArray;

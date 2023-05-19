@@ -16,7 +16,9 @@ Game::Game(Server *server)
 void Game::waitGame(QTcpSocket* socket) {
     if (isGameRunning) {
         server->sendMessage(socket, Guesser);
-        server->sendMessage(socket, UpdateImage, *currentImage);
+        if (currentImage) {
+            server->sendMessage(socket, UpdateImage, *currentImage);
+        }
         return;
     }
 
@@ -80,8 +82,7 @@ void Game::updateImage(QByteArray &message) {
     qDebug() << socketToPlayer.count();
 
     foreach (auto socket, socketToPlayer.keys()) {
-//        if (socket == currentDrawer) continue;
-        qDebug() << "HERE2";
+        if (socket == currentDrawer) continue;
         server->sendMessage(socket, UpdateImage, *currentImage);
     }
     // update drawer image
