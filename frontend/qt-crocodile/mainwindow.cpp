@@ -31,13 +31,15 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::onMouseUpSlot() {
-    qDebug() << "mouse up";
+    QByteArray imageBA = exportGraphicsView()->buffer();
+    sendMessage(MessageCodes::UpdateImage, imageBA);
 }
 
 void MainWindow::on_sendWordButton_clicked()
 {
-    QByteArray imageBA = exportGraphicsView()->buffer();
-    sendMessage(MessageCodes::UpdateImage, imageBA);
+    QString word = ui->wordInput->text();
+    QByteArray bArray = word.toUtf8();
+    sendMessage(MessageCodes::Guess, bArray);
 
 }
 
@@ -46,8 +48,7 @@ void MainWindow::showWindow(QString Username) {
     this->show();
 
     this->Username = Username;
-    QByteArray UsernameUTFed = Username.toUtf8();
-    sendMessage(MessageCodes::SetNickname, UsernameUTFed);
+
     qDebug() << "showWindow" << Username;
 
     openConnection();
