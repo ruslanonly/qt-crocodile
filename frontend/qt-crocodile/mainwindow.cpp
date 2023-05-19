@@ -45,7 +45,6 @@ void MainWindow::on_sendWordButton_clicked()
 
 
 void MainWindow::showWindow(QString Username) {
-    this->show();
 
     this->Username = Username;
 
@@ -54,6 +53,8 @@ void MainWindow::showWindow(QString Username) {
     openConnection();
 
     sendMessage(MessageCodes::SetNickname, this->Username.toUtf8());
+
+    this->show();
 }
 
 void MainWindow::openConnection() {
@@ -78,7 +79,6 @@ void MainWindow::openConnection() {
 // Socket
 
 void MainWindow::readSocket() {
-    qDebug() << "Соединение установлено";
 
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
 
@@ -96,7 +96,7 @@ void MainWindow::readSocket() {
     }
 
     QString header = bArray.mid(0,128);
-    char MESSAGE_CODE = header.split(":")[1].toInt();
+    int MESSAGE_CODE = header.split(":")[1].toInt();
 
     bArray = bArray.mid(128);
 
