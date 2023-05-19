@@ -72,8 +72,12 @@ void Server::sendMessage(QTcpSocket* socket, int code, QByteArray message)
             QByteArray byteArray = message;
             byteArray.prepend(header);
 
+            qDebug() << socket->socketDescriptor();
+
             socketStream.setVersion(QDataStream::Qt_5_15);
             socketStream << byteArray;
+
+
         }
         else
             qDebug() << "ERROR: Socket doesn't seem to be opened";
@@ -106,15 +110,6 @@ void Server::readSocket() {
     buffer = buffer.mid(128);
 
     emit newMessage(socket, messageCode, buffer);
-
-//    if(fileType=="attachment"){
-//        currentImageBuffer = buffer.mid(128);
-//        emit newMessage("TEST");
-
-//    } else if(fileType=="message"){
-//        QString message = QString("%1 :: %2").arg(socket->socketDescriptor()).arg(QString::fromStdString(buffer.toStdString()));
-//        emit newMessage("message");
-//    }
 }
 
 void Server::displayError(QAbstractSocket::SocketError socketError)

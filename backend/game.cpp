@@ -30,7 +30,7 @@ void Game::startGame() {
     currentWord = "test";
 
     isGameRunning = true;
-    currentDrawer = socketToPlayer.keys()[QRandomGenerator::global()->bounded(0,playerCount)];
+    currentDrawer = socketToPlayer.keys()[0];
     server->sendMessage(currentDrawer, Drawer, currentWord.toUtf8());
 
     foreach (auto socket, socketToPlayer.keys()) {
@@ -43,9 +43,12 @@ void Game::removePlayer(QTcpSocket* socket) {
 }
 
 void Game::parseMessage(QTcpSocket* socket, int code, QByteArray message) {
+    qDebug() << code;
+
     switch (code) {
     case SetNickname: {
         socketToPlayer[socket] = QString(message);
+
         waitGame(socket);
         break;
     }
@@ -74,9 +77,11 @@ void Game::checkAnswer(QTcpSocket* socket, QString guess) {
 
 void Game::updateImage(QByteArray &message) {
     currentImage = &message;
+    qDebug() << socketToPlayer.count();
 
     foreach (auto socket, socketToPlayer.keys()) {
-        if (socket == currentDrawer) continue;
+//        if (socket == currentDrawer) continue;
+        qDebug() << "HERE2";
         server->sendMessage(socket, UpdateImage, *currentImage);
     }
     // update drawer image
