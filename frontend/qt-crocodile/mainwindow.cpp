@@ -46,6 +46,8 @@ void MainWindow::showWindow(QString Username) {
     this->show();
 
     this->Username = Username;
+    QByteArray UsernameUTFed = Username.toUtf8();
+    sendMessage(MessageCodes::SetNickname, UsernameUTFed);
     qDebug() << "showWindow" << Username;
 
     openConnection();
