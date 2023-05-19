@@ -95,12 +95,10 @@ void Server::readSocket() {
     socketStream.startTransaction();
     socketStream >> buffer;
 
-//    if(!socketStream.commitTransaction())
-//    {
-//        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
-//        emit newMessage(message);
-//        return;
-//    }
+    if(!socketStream.commitTransaction())
+    {
+        return;
+    }
 
     QString header = buffer.mid(0,128);
     char messageCode = header.split(":")[1].toInt();
