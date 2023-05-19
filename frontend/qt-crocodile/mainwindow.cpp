@@ -52,6 +52,8 @@ void MainWindow::showWindow(QString Username) {
     qDebug() << "showWindow" << Username;
 
     openConnection();
+
+    sendMessage(MessageCodes::SetNickname, this->Username.toUtf8());
 }
 
 void MainWindow::openConnection() {
@@ -88,11 +90,17 @@ void MainWindow::readSocket() {
     socketStream.startTransaction();
     socketStream >> bArray;
 
+    if(!socketStream.commitTransaction())
+    {
+        return;
+    }
+
     QString header = bArray.mid(0,128);
     char MESSAGE_CODE = header.split(":")[1].toInt();
 
     bArray = bArray.mid(128);
 
+    qDebug() << "message_code" << MESSAGE_CODE;
 
     switch (MESSAGE_CODE) {
     case Guess: {
@@ -167,7 +175,7 @@ void MainWindow::sendMessage(MessageCodes messageCode, QByteArray qArray) {
             socketStream.setVersion(QDataStream::Qt_5_15);
 
             QByteArray header;
-            header.prepend(QString("messageCode: MESSAGE CODES").toUtf8());
+            header.prepend(QString("messageCode: %1").arg(messageCode).toUtf8());
             header.resize(128);
 
             QByteArray byteArray = qArray;
@@ -205,6 +213,7 @@ QBuffer* MainWindow::exportGraphicsView() {
 }
 
 void MainWindow::updateGraphicsView(QBuffer* buffer) {
+    qDebug() << "updateGraphicsView";
     QByteArray pngData = buffer->buffer();
 
     QBuffer tbuff;
