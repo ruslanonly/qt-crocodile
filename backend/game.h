@@ -9,6 +9,7 @@
 #include <QStandardPaths>
 #include <QTcpServer>
 #include <QTcpSocket>
+#include <QRandomGenerator>
 #include "server.h"
 
 
@@ -24,7 +25,8 @@ private:
         GameEnded,
         Drawer,
         Guesser,
-        WrongAnswer
+        WrongAnswer,
+        SetNickname
     };
 
 public:
@@ -32,12 +34,22 @@ public:
 
     void updateImage(QByteArray &newImage);
     void startGame();
+    void waitGame(QTcpSocket* socket);
+    void parseMessage(QTcpSocket* socket, int code, QByteArray message);
+    void removePlayer(QTcpSocket* socket);
+    void checkAnswer(QTcpSocket* socket, QString guess);
+    void endGame();
 private:
     Server *server;
 
-    int playerCount = 0;
-    QByteArray currentImage;
+    bool isGameRunning;
+    int playerCount;
 
+    QTcpSocket* currentDrawer;
+    QByteArray *currentImage;
+    QString currentWord;
+
+    QMap<QTcpSocket*, QString> socketToPlayer;
 };
 
 #endif // GAME_H

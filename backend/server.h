@@ -19,8 +19,12 @@ public:
     Server();
     ~Server();
 
+    void sendMessage(QTcpSocket* socket, int code, QByteArray message = "");
+
 signals:
-    void newMessage(QString);
+    void connected(QTcpSocket* socket);
+    void newMessage(QTcpSocket* socket, int code, QByteArray message);
+    void disconnected(QTcpSocket* socket);
 
 private slots:
     void newConnection();
@@ -31,17 +35,13 @@ private slots:
     void displayError(QAbstractSocket::SocketError socketError);
 
     //void displayMessage(const QString& str);
-    void sendMessage(QTcpSocket* socket, int code, QByteArray& message);
+
     //void sendAttachment(QTcpSocket* socket, QString filePath);
 
     //void refreshComboBox();
 private:
-    int playerCount;
-
     QTcpServer* m_server;
     QSet<QTcpSocket*> connection_set;
-
-    QByteArray currentImageBuffer;
 };
 
 #endif // SERVER_H

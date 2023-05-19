@@ -44,7 +44,7 @@ void Server::appendToSocketList(QTcpSocket* socket)
     connect(socket, &QTcpSocket::disconnected, this, &Server::discardSocket);
     connect(socket, &QAbstractSocket::errorOccurred, this, &Server::displayError);
     qDebug() << QString("INFO :: Client with sockd:%1 has just entered the room").arg(socket->socketDescriptor());
-
+    emit connected(socket);
 //    QString str("INFO :: Client with sockd:%1 has just entered the room");
 //    str = str.arg(socket->socketDescriptor());
 //    foreach (QTcpSocket* socket, connection_set)
@@ -55,7 +55,7 @@ void Server::appendToSocketList(QTcpSocket* socket)
 //    displayMessage(QString("INFO :: Client with sockd:%1 has just entered the room").arg(socket->socketDescriptor()));
 }
 
-void Server::sendMessage(QTcpSocket* socket, MessageCodes code, QByteArray& message)
+void Server::sendMessage(QTcpSocket* socket, int code, QByteArray message)
 {
     if(socket)
     {
@@ -66,7 +66,7 @@ void Server::sendMessage(QTcpSocket* socket, MessageCodes code, QByteArray& mess
             socketStream.setVersion(QDataStream::Qt_5_15);
 
             QByteArray header;
-            header.prepend(QString("messageCode:0").toUtf8());
+            header.prepend(QString("messageCode:%1").arg(code).toUtf8());
             header.resize(128);
 
             QByteArray byteArray = message;
@@ -95,17 +95,19 @@ void Server::readSocket() {
     socketStream.startTransaction();
     socketStream >> buffer;
 
-    if(!socketStream.commitTransaction())
-    {
-        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
-        emit newMessage(message);
-        return;
-    }
+//    if(!socketStream.commitTransaction())
+//    {
+//        QString message = QString("%1 :: Waiting for more data to come..").arg(socket->socketDescriptor());
+//        emit newMessage(message);
+//        return;
+//    }
 
     QString header = buffer.mid(0,128);
     char messageCode = header.split(":")[1].toInt();
 
     buffer = buffer.mid(128);
+
+    emit newMessage(socket, messageCode, buffer);
 
 //    if(fileType=="attachment"){
 //        currentImageBuffer = buffer.mid(128);
@@ -140,6 +142,8 @@ void Server::discardSocket()
     QTcpSocket* socket = reinterpret_cast<QTcpSocket*>(sender());
     QSet<QTcpSocket*>::iterator it = connection_set.find(socket);
     if (it != connection_set.end()){
+        emit disconnected(socket);
+
         qDebug() << QString("INFO :: A client has just left the room").arg(socket->socketDescriptor());
         connection_set.remove(*it);
     }
