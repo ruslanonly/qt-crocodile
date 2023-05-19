@@ -5,7 +5,7 @@ Game::Game(Server *server)
 {
     this->server = server;
     playerCount = 0;
-    currentImage = nullptr;
+    currentImage;
     isGameRunning = false;
 
 //    connect(server, &Server::connected, this, &Game::waitGame);
@@ -14,11 +14,12 @@ Game::Game(Server *server)
 }
 
 void Game::waitGame(QTcpSocket* socket) {
+
+
     if (isGameRunning) {
-        server->sendMessage(socket, Guesser);
-        if (currentImage) {
-            server->sendMessage(socket, UpdateImage, *currentImage);
-        }
+        server->sendMessage(socket, GameEnded);
+        server->sendMessage(socket, UpdateImage, currentImage);
+
         return;
     }
 
@@ -78,12 +79,12 @@ void Game::checkAnswer(QTcpSocket* socket, QString guess) {
 }
 
 void Game::updateImage(QByteArray &message) {
-    currentImage = &message;
+    currentImage = message;
     qDebug() << socketToPlayer.count();
 
     foreach (auto socket, socketToPlayer.keys()) {
         if (socket == currentDrawer) continue;
-        server->sendMessage(socket, UpdateImage, *currentImage);
+        server->sendMessage(socket, UpdateImage, currentImage);
     }
     // update drawer image
 }

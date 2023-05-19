@@ -45,8 +45,8 @@ private:
     bool isGameRunning;
     int playerCount;
 
-    QTcpSocket* currentDrawer;
-    QByteArray *currentImage;
+    QTcpSocket *currentDrawer;
+    QByteArray currentImage;
     QString currentWord;
 
     QMap<QTcpSocket*, QString> socketToPlayer;
