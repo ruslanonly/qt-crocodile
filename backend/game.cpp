@@ -29,10 +29,13 @@ void Game::waitGame(QTcpSocket* socket) {
 }
 
 void Game::startGame() {
-    currentWord = "test";
-
     isGameRunning = true;
-    currentDrawer = socketToPlayer.keys()[0];
+
+    int wordNumber = QRandomGenerator::global()->bounded(0, wordList->count());
+    int drawerNumber = QRandomGenerator::global()->bounded(0, socketToPlayer.count());
+
+    currentDrawer = socketToPlayer.keys()[drawerNumber];
+    currentWord = wordList->at(wordNumber);
 
     foreach (auto socket, socketToPlayer.keys()) {
         if (socket == currentDrawer) server->sendMessage(socket, Drawer, currentWord.toUtf8());
