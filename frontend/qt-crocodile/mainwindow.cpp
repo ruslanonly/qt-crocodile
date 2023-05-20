@@ -130,7 +130,9 @@ void MainWindow::readSocket() {
         ui->wordInput->clear();
 
     }
+
     case Drawer:{//
+        qDebug() << QString(bArray);
         ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray));
         ui->graphicsView->scene()->clear();
 
@@ -162,6 +164,7 @@ void MainWindow::readSocket() {
         break;
     }
     case WrongAnswer:{//
+        qDebug() << "WRONG";
         ui->statusBarLabel->setText("Слово неверное");
 
         break;
