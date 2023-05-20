@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene);
 
     connect(scene, PaintScene::mouseUpEvent, this, MainWindow::onMouseUpSlot);
+
 }
 
 MainWindow::~MainWindow()
@@ -40,7 +41,7 @@ void MainWindow::on_sendWordButton_clicked()
     QString word = ui->wordInput->text();
     QByteArray bArray = word.toUtf8();
     sendMessage(MessageCodes::Guess, bArray);
-
+    ui->wordInput->clear();
 }
 
 
@@ -116,22 +117,21 @@ void MainWindow::readSocket() {
     }
     case GameStarted:{//
 
-
+        ui->statusBarLabel->setText("Игра начата");
+        ui->graphicsView->scene()->clear();
         break;
     }
     case GameEnded:{//
+        ui->statusBarLabel->setText("Игра закончена");
 
-
-        break;
     }
     case Drawer:{//
-
+        this->ui->graphicsView->setInteractive(true);
 
         break;
     }
     case Guesser:{//
-
-
+        this->ui->graphicsView->setInteractive(false);
         break;
     }
     case WrongAnswer:{//
@@ -220,10 +220,8 @@ void MainWindow::updateGraphicsView(QBuffer* buffer) {
     tbuff.setData(pngData);
     tbuff.open(QIODevice::ReadOnly);
 
-    // Seek to the beginning of the QBuffer
     tbuff.seek(0);
 
-    // Create a QImageReader and set the QBuffer as its device
     QImageReader reader;
     reader.setDevice(&tbuff);
 

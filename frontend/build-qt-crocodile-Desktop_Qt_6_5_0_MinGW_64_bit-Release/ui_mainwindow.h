@@ -13,11 +13,9 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
@@ -30,9 +28,12 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralwidget;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
+    QVBoxLaystatusBarLabelatusBarLayout;
+    QLabel *label;
+    QLabel *label_2;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_2;
     QLabel *wordLabel;
@@ -40,23 +41,42 @@ public:
     QPushButton *sendWordButton;
     QSpacerItem *verticalSpacer_2;
     QGraphicsView *graphicsView;
-    QMenuBar *menubar;
     QStatusBar *statusbar;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(847, 674);
+        MainWindow->resize(835, 649);
+        MainWindow->setMaximumSize(QSize(16777215, 649));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        horizontalLayout = new QHBoxLayout(centralwidget);
-        horizontalLayout->setObjectName("horizontalLayout");
+        gridLayout_2 = new QGridLayout(centralwidget);
+        gridLayout_2->setObjectName("gridLayout_2");
         gridLayout = new QGridLayout();
         gridLayout->setObjectName("gridLayout");
         verticalLayout = new QVBoxLayout();
         verticalLayout->setObjectName("verticalLayout");
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        statusBarLayout = new QVBoxLayout();
+        statusBarLayout->setObjectName("statusBarLayout");
+        label = new QLabel(centralwidget);
+        label->setObjectName("label");
+        label->setStyleSheet(QString::fromUtf8("font: 700 9.5pt \"Segoe UI\";\n"
+"color: black;"));
+
+        statusBarLabelarLayout->addWidget(label);
+
+       statusBastatusBarLabel = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+        label_2->setStyleSheet(QString::fromUtf8("border: 1.5px solid rgba(4, 102, 200, 0.5);\n"
+"color: black;\n"
+"border-radius: 5px;\n"
+"paddingstatusBarLabelatusBarLabel      statusBarLabelBarLayout->addWidget(label_2);
+
+
+        verticalLayout->addLayout(statusBarLayout);
+
+        verticalSpacer = new QSpacstatusBarLabel20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
 
@@ -86,7 +106,7 @@ public:
         verticalLayout->addItem(verticalSpacer_2);
 
 
-        gridLayout->addLayout(verticalLayout, 0, 1, 1, 1);
+        gridLayout->addLayout(verticalLayout, 0, 2, 1, 1);
 
         graphicsView = new QGraphicsView(centralwidget);
         graphicsView->setObjectName("graphicsView");
@@ -94,19 +114,16 @@ public:
         graphicsView->setMaximumSize(QSize(600, 600));
         graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        graphicsView->setInteractive(false);
         graphicsView->setSceneRect(QRectF(0, 0, 600, 600));
 
-        gridLayout->addWidget(graphicsView, 0, 0, 1, 1);
+        gridLayout->addWidget(graphicsView, 0, 1, 1, 1);
 
         gridLayout->setColumnStretch(0, 1);
 
-        horizontalLayout->addLayout(gridLayout);
+        gridLayout_2->addLayout(gridLayout, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 847, 25));
-        MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
         MainWindow->setStatusBar(statusbar);
@@ -119,13 +136,15 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "\320\241\321\202\320\260\321\202\321\203\321\201 \320\270\320\263\321\200\321\213", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
         wordLabel->setText(QCoreApplication::translate("MainWindow", "\320\241\320\273\320\276\320\262\320\276", nullptr));
         sendWordButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
     } // retranslateUi
 
 };
 
-namespace Ui {
+namstatusBarLabelUi {
     class MainWindow: public Ui_MainWindow {};
 } // namespace Ui
 
