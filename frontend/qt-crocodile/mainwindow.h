@@ -44,6 +44,8 @@ private slots:
     void on_sendWordButton_clicked();
     void onMouseUpSlot();
 
+    void on_reconnectButton_clicked();
+
 private:
     QBuffer* exportGraphicsView();
     void updateGraphicsView(QBuffer* buffer);
@@ -54,6 +56,7 @@ private:
     Ui::MainWindow *ui;
 
     QString Username;
+    bool isDrawer;
     PaintScene *scene;
 
     QTcpSocket* socket;

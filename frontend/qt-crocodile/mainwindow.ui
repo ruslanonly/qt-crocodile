@@ -116,6 +116,13 @@ padding: 3px</string>
           </property>
          </spacer>
         </item>
+        <item>
+         <widget class="QPushButton" name="reconnectButton">
+          <property name="text">
+           <string>Переподключиться</string>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item row="0" column="1">

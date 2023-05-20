@@ -44,6 +44,10 @@ void MainWindow::on_sendWordButton_clicked()
     ui->wordInput->clear();
 }
 
+void MainWindow::on_reconnectButton_clicked()
+{
+    openConnection();
+}
 
 void MainWindow::showWindow(QString Username) {
 
@@ -121,12 +125,22 @@ void MainWindow::readSocket() {
         break;
     }
     case GameEnded:{//
-        ui->statusBarLabel->setText(QString(buffer));
+        ui->statusBarLabel->setText(QString(bArray));
+        if (this->isDrawer)
+        ui->wordInput->clear();
 
     }
     case Drawer:{//
-        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(buffer));
+        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray));
         ui->graphicsView->scene()->clear();
+
+        QString wordToDraw(bArray);
+
+        qDebug() << "wordToDraw" << wordToDraw;
+        this->ui->wordInput->setDisabled(true);
+        ui->wordInput->setText(wordToDraw);
+        ui->sendWordButton->hide();
+        this->isDrawer = true;
 
         this->ui->graphicsView->setInteractive(true);
 
@@ -135,6 +149,11 @@ void MainWindow::readSocket() {
     case Guesser:{//
         ui->statusBarLabel->setText("Игра начата");
         ui->graphicsView->scene()->clear();
+
+        ui->wordInput->setDisabled(false);
+        ui->wordInput->clear();
+        ui->sendWordButton->show();
+        this->isDrawer = false;
 
         QBuffer* buffer = new QBuffer(&bArray);
         updateGraphicsView(buffer);
@@ -246,3 +265,4 @@ void MainWindow::updateGraphicsView(QBuffer* buffer) {
     ui->graphicsView->setScene(scene);
 
 }
+

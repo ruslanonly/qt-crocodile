@@ -82,7 +82,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSPaintSceneENDCLASS[] = {
        1,    0,   20,    2, 0x06,    1 /* Public */,
 
  // signals: parameters
-    QMetaType::Int,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -97,7 +97,7 @@ Q_CONSTINIT const QMetaObject PaintScene::staticMetaObject = { {
         // Q_OBJECT / Q_GADGET
         QtPrivate::TypeAndForceComplete<PaintScene, std::true_type>,
         // method 'mouseUpEvent'
-        QtPrivate::TypeAndForceComplete<int, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>
     >,
     nullptr
 } };
@@ -108,20 +108,20 @@ void PaintScene::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         auto *_t = static_cast<PaintScene *>(_o);
         (void)_t;
         switch (_id) {
-        case 0: { int _r = _t->mouseUpEvent();
-            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
+        case 0: _t->mouseUpEvent(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = int (PaintScene::*)();
+            using _t = void (PaintScene::*)();
             if (_t _q_method = &PaintScene::mouseUpEvent; *reinterpret_cast<_t *>(_a[1]) == _q_method) {
                 *result = 0;
                 return;
             }
         }
     }
+    (void)_a;
 }
 
 const QMetaObject *PaintScene::metaObject() const
@@ -155,11 +155,8 @@ int PaintScene::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-int PaintScene::mouseUpEvent()
+void PaintScene::mouseUpEvent()
 {
-    int _t0{};
-    void *_a[] = { const_cast<void*>(reinterpret_cast<const void*>(std::addressof(_t0))) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
-    return _t0;
+    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
 }
 QT_WARNING_POP

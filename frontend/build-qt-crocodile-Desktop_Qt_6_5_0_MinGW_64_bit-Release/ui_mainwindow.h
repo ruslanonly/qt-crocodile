@@ -31,15 +31,16 @@ public:
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
-    QVBoxLaystatusBarLabelatusBarLayout;
+    QVBoxLayout *statusBarLayout;
     QLabel *label;
-    QLabel *label_2;
+    QLabel *statusBarLabel;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_2;
     QLabel *wordLabel;
     QLineEdit *wordInput;
     QPushButton *sendWordButton;
     QSpacerItem *verticalSpacer_2;
+    QPushButton *reconnectButton;
     QGraphicsView *graphicsView;
     QStatusBar *statusbar;
 
@@ -64,19 +65,27 @@ public:
         label->setStyleSheet(QString::fromUtf8("font: 700 9.5pt \"Segoe UI\";\n"
 "color: black;"));
 
-        statusBarLabelarLayout->addWidget(label);
+        statusBarLayout->addWidget(label);
 
-       statusBastatusBarLabel = new QLabel(centralwidget);
-        label_2->setObjectName("label_2");
-        label_2->setStyleSheet(QString::fromUtf8("border: 1.5px solid rgba(4, 102, 200, 0.5);\n"
+        statusBarLabel = new QLabel(centralwidget);
+        statusBarLabel->setObjectName("statusBarLabel");
+        statusBarLabel->setEnabled(true);
+        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Preferred);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(statusBarLabel->sizePolicy().hasHeightForWidth());
+        statusBarLabel->setSizePolicy(sizePolicy);
+        statusBarLabel->setStyleSheet(QString::fromUtf8("border: 1.5px solid rgba(4, 102, 200, 0.5);\n"
 "color: black;\n"
 "border-radius: 5px;\n"
-"paddingstatusBarLabelatusBarLabel      statusBarLabelBarLayout->addWidget(label_2);
+"padding: 3px"));
+
+        statusBarLayout->addWidget(statusBarLabel);
 
 
         verticalLayout->addLayout(statusBarLayout);
 
-        verticalSpacer = new QSpacstatusBarLabel20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer);
 
@@ -104,6 +113,11 @@ public:
         verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout->addItem(verticalSpacer_2);
+
+        reconnectButton = new QPushButton(centralwidget);
+        reconnectButton->setObjectName("reconnectButton");
+
+        verticalLayout->addWidget(reconnectButton);
 
 
         gridLayout->addLayout(verticalLayout, 0, 2, 1, 1);
@@ -137,14 +151,15 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "\320\241\321\202\320\260\321\202\321\203\321\201 \320\270\320\263\321\200\321\213", nullptr));
-        label_2->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+        statusBarLabel->setText(QString());
         wordLabel->setText(QCoreApplication::translate("MainWindow", "\320\241\320\273\320\276\320\262\320\276", nullptr));
         sendWordButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
+        reconnectButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\277\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217", nullptr));
     } // retranslateUi
 
 };
 
-namstatusBarLabelUi {
+namespace Ui {
     class MainWindow: public Ui_MainWindow {};
 } // namespace Ui
 
