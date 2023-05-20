@@ -40,6 +40,7 @@ void Server::newConnection()
 void Server::appendToSocketList(QTcpSocket* socket)
 {
     connection_set.insert(socket);
+    socket->setSocketOption(QAbstractSocket::SocketOption::LowDelayOption,0);
     connect(socket, &QTcpSocket::readyRead, this, &Server::readSocket);
     connect(socket, &QTcpSocket::disconnected, this, &Server::discardSocket);
     connect(socket, &QAbstractSocket::errorOccurred, this, &Server::displayError);

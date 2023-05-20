@@ -64,6 +64,7 @@ void MainWindow::showWindow(QString Username) {
 
 void MainWindow::openConnection() {
     socket = new QTcpSocket(this);
+    socket->setSocketOption(QAbstractSocket::SocketOption::LowDelayOption,0);
 
     connect(socket, &QTcpSocket::readyRead, this, &MainWindow::readSocket);
     connect(socket, &QTcpSocket::disconnected, this, &MainWindow::discardSocket);
