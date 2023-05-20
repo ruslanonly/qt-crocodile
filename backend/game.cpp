@@ -100,6 +100,8 @@ void Game::updateImage(QByteArray &message) {
 
 
 void Game::endGame(QByteArray gameResult) {
+    isGameRunning = false;
+
     foreach (auto socket, socketToPlayer.keys()) {
         server->sendMessage(socket, GameEnded, gameResult);
     }
