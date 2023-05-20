@@ -79,6 +79,7 @@ public:
 "color: black;\n"
 "border-radius: 5px;\n"
 "padding: 3px"));
+        statusBarLabel->setWordWrap(true);
 
         statusBarLayout->addWidget(statusBarLabel);
 

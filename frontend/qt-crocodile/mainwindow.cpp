@@ -121,11 +121,13 @@ void MainWindow::readSocket() {
     }
     case GameStarted:{//
         ui->statusBarLabel->setText("Игра начата");
-        ui->graphicsView->scene()->clear();
         break;
     }
     case GameEnded:{//
-        ui->statusBarLabel->setText(QString(bArray));
+        QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
+                           .arg(QString(bArray).split(":")[0])
+                           .arg(QString(bArray).split(":")[1]);
+        ui->statusBarLabel->setText(text);
         if (this->isDrawer)
         ui->wordInput->clear();
 
@@ -146,6 +148,7 @@ void MainWindow::readSocket() {
 
         this->ui->graphicsView->setInteractive(true);
 
+        ui->graphicsView->scene()->clear();
         break;
     }
     case Guesser:{//
@@ -161,6 +164,8 @@ void MainWindow::readSocket() {
         updateGraphicsView(buffer);
 
         this->ui->graphicsView->setInteractive(false);
+
+        ui->graphicsView->scene()->clear();
         break;
     }
     case WrongAnswer:{//
