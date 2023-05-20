@@ -29,6 +29,8 @@ void Game::waitGame(QTcpSocket* socket) {
 }
 
 void Game::startGame() {
+    qDebug() << "Game restarted";
+
     isGameRunning = true;
 
     int wordNumber = QRandomGenerator::global()->bounded(0, wordList->count());
@@ -38,7 +40,10 @@ void Game::startGame() {
     currentWord = wordList->at(wordNumber);
 
     foreach (auto socket, socketToPlayer.keys()) {
-        if (socket == currentDrawer) server->sendMessage(socket, Drawer, currentWord.toUtf8());
+        if (socket == currentDrawer) {
+            server->sendMessage(socket, Drawer, currentWord.toUtf8());
+            continue;
+        }
         server->sendMessage(socket, Guesser, currentImage);
     }
 }

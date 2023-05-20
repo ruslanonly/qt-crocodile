@@ -40,6 +40,7 @@ public:
     QLineEdit *wordInput;
     QPushButton *sendWordButton;
     QSpacerItem *verticalSpacer_2;
+    QPushButton *reconnectButton;
     QGraphicsView *graphicsView;
     QStatusBar *statusbar;
 
@@ -113,6 +114,11 @@ public:
 
         verticalLayout->addItem(verticalSpacer_2);
 
+        reconnectButton = new QPushButton(centralwidget);
+        reconnectButton->setObjectName("reconnectButton");
+
+        verticalLayout->addWidget(reconnectButton);
+
 
         gridLayout->addLayout(verticalLayout, 0, 2, 1, 1);
 
@@ -148,6 +154,7 @@ public:
         statusBarLabel->setText(QString());
         wordLabel->setText(QCoreApplication::translate("MainWindow", "\320\241\320\273\320\276\320\262\320\276", nullptr));
         sendWordButton->setText(QCoreApplication::translate("MainWindow", "\320\236\321\202\320\277\321\200\320\260\320\262\320\270\321\202\321\214", nullptr));
+        reconnectButton->setText(QCoreApplication::translate("MainWindow", "\320\237\320\265\321\200\320\265\320\277\320\276\320\264\320\272\320\273\321\216\321\207\320\270\321\202\321\214\321\201\321\217", nullptr));
     } // retranslateUi
 
 };
