@@ -111,7 +111,7 @@ void Game::endGame(QByteArray gameResult) {
         server->sendMessage(socket, GameEnded, gameResult);
     }
 
-    QThread::sleep(5);
+//    QThread::sleep(5);
     if (socketToPlayer.count() > 1) {
         startGame();
     }
