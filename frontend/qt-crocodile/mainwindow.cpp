@@ -105,7 +105,7 @@ void MainWindow::readSocket() {
 
     bArray = bArray.mid(128);
 
-    qDebug() << "message_code" << MESSAGE_CODE;
+    qDebug() << "message_code" << MESSAGE_CODE << QString(bArray);
 
     switch (MESSAGE_CODE) {
     case Guess: {
@@ -127,9 +127,9 @@ void MainWindow::readSocket() {
         QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
                            .arg(QString(bArray).split(":")[0])
                            .arg(QString(bArray).split(":")[1]);
-        QMessageBox* msgBox;
-        msgBox->setText(text);
-        msgBox->show();
+//        QMessageBox* msgBox = new QMessageBox;
+//        msgBox->setText(text);
+//        msgBox->show();
 
         ui->statusBarLabel->setText(text);
         if (this->isDrawer)

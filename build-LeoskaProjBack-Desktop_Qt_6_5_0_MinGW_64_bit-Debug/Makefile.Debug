@@ -238,6 +238,10 @@ debug/moc_game.cpp: ../backend/game.h \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/QRandomGenerator \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/qrandom.h \
 		../backend/server.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/QThread \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qthread.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qdeadlinetimer.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qelapsedtimer.h \
 		debug/moc_predefs.h \
 		../../../Qt/6.5.0/mingw_64/bin/moc.exe
 	D:\Qt\6.5.0\mingw_64\bin\moc.exe $(DEFINES) --include D:/Projects/qt-crocodile/build-LeoskaProjBack-Desktop_Qt_6_5_0_MinGW_64_bit-Debug/debug/moc_predefs.h -ID:/Qt/6.5.0/mingw_64/mkspecs/win32-g++ -ID:/Projects/qt-crocodile/backend -ID:/Qt/6.5.0/mingw_64/include -ID:/Qt/6.5.0/mingw_64/include/QtNetwork -ID:/Qt/6.5.0/mingw_64/include/QtCore -I. -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++ -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32 -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include -ID:/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed -ID:/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include ..\backend\game.h -o debug\moc_game.cpp
@@ -506,7 +510,11 @@ debug/game.o: ../backend/game.cpp ../backend/game.h \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/qvariant.h \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/QRandomGenerator \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/qrandom.h \
-		../backend/server.h
+		../backend/server.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/QThread \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qthread.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qdeadlinetimer.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qelapsedtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\game.o ..\backend\game.cpp
 
 debug/main.o: ../backend/main.cpp ../../../Qt/6.5.0/mingw_64/include/QtCore/QCoreApplication \
@@ -651,7 +659,8 @@ debug/main.o: ../backend/main.cpp ../../../Qt/6.5.0/mingw_64/include/QtCore/QCor
 		../../../Qt/6.5.0/mingw_64/include/QtNetwork/qtcpsocket.h \
 		../backend/game.h \
 		../../../Qt/6.5.0/mingw_64/include/QtCore/QRandomGenerator \
-		../../../Qt/6.5.0/mingw_64/include/QtCore/qrandom.h
+		../../../Qt/6.5.0/mingw_64/include/QtCore/qrandom.h \
+		../../../Qt/6.5.0/mingw_64/include/QtCore/QThread
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o debug\main.o ..\backend\main.cpp
 
 debug/server.o: ../backend/server.cpp ../backend/server.h \
