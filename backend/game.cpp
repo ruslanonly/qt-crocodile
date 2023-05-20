@@ -105,8 +105,8 @@ void Game::endGame(QByteArray gameResult) {
     }
 
     QThread::sleep(5);
-    waitGame();
+    if (socketToPlayer.count() > 1) {
+        startGame();
+    }
     // output winner and restart game
 }
-
-
