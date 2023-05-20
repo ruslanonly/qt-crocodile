@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     scene = new PaintScene();
     ui->graphicsView->setScene(scene);
 
-    connect(scene, PaintScene::mouseUpEvent, this, MainWindow::onMouseUpSlot);
+    connect(scene, &PaintScene::mouseUpEvent, this, &MainWindow::onMouseUpSlot);
 
 }
 
@@ -116,26 +116,34 @@ void MainWindow::readSocket() {
         break;
     }
     case GameStarted:{//
-
         ui->statusBarLabel->setText("Игра начата");
         ui->graphicsView->scene()->clear();
         break;
     }
     case GameEnded:{//
-        ui->statusBarLabel->setText("Игра закончена");
+        ui->statusBarLabel->setText(QString(buffer));
 
     }
     case Drawer:{//
+        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(buffer));
+        ui->graphicsView->scene()->clear();
+
         this->ui->graphicsView->setInteractive(true);
 
         break;
     }
     case Guesser:{//
+        ui->statusBarLabel->setText("Игра начата");
+        ui->graphicsView->scene()->clear();
+
+        QBuffer* buffer = new QBuffer(&bArray);
+        updateGraphicsView(buffer);
+
         this->ui->graphicsView->setInteractive(false);
         break;
     }
     case WrongAnswer:{//
-
+        ui->statusBarLabel->setText("Слово неверное");
 
         break;
     }

@@ -61,7 +61,6 @@ void Server::sendMessage(QTcpSocket* socket, int code, QByteArray message)
     {
         if(socket->isOpen())
         {
-
             QDataStream socketStream(socket);
             socketStream.setVersion(QDataStream::Qt_5_15);
 
@@ -76,8 +75,6 @@ void Server::sendMessage(QTcpSocket* socket, int code, QByteArray message)
 
             socketStream.setVersion(QDataStream::Qt_5_15);
             socketStream << byteArray;
-
-
         }
         else
             qDebug() << "ERROR: Socket doesn't seem to be opened";

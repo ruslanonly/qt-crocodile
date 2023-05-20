@@ -16,7 +16,7 @@ public:
     ~PaintScene();
 
 signals:
-    mouseUpEvent();
+    void mouseUpEvent();
 private:
     QPointF previousPoint;
 

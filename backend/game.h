@@ -38,7 +38,7 @@ public:
     void parseMessage(QTcpSocket* socket, int code, QByteArray message);
     void removePlayer(QTcpSocket* socket);
     void checkAnswer(QTcpSocket* socket, QString guess);
-    void endGame();
+    void endGame(QByteArray gameResult);
 private:
     Server *server;
 
