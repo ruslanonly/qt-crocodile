@@ -104,5 +104,9 @@ void Game::endGame(QByteArray gameResult) {
         server->sendMessage(socket, GameEnded, gameResult);
     }
 
+    QThread::sleep(5);
+    waitGame();
     // output winner and restart game
 }
+
+

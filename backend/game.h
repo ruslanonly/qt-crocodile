@@ -11,7 +11,7 @@
 #include <QTcpSocket>
 #include <QRandomGenerator>
 #include "server.h"
-#include <QVector>
+#include <QThread>
 
 
 
