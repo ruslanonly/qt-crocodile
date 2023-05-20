@@ -29,7 +29,7 @@ void Game::waitGame(QTcpSocket* socket) {
 }
 
 void Game::startGame() {
-    qDebug() << "Game restarted";
+    qDebug() << "Game started";
 
     isGameRunning = true;
 
@@ -48,11 +48,33 @@ void Game::startGame() {
     }
 }
 
+void Game::restartGame(QString lastGameStatus) {
+    qDebug() << "Game restarted";
+
+    isGameRunning = true;
+
+    int wordNumber = QRandomGenerator::global()->bounded(0, wordList->count());
+    int drawerNumber = QRandomGenerator::global()->bounded(0, socketToPlayer.count());
+
+    currentDrawer = socketToPlayer.keys()[drawerNumber];
+    currentWord = wordList->at(wordNumber);
+
+    QString gameStatusWithWord = lastGameStatus + ":" + currentWord;
+
+    foreach (auto socket, socketToPlayer.keys()) {
+        if (socket == currentDrawer) {
+            server->sendMessage(socket, GameEndedDrawer, gameStatusWithWord.toUtf8());
+            continue;
+        }
+        server->sendMessage(socket, GameEndedGuesser, lastGameStatus.toUtf8());
+    }
+}
+
 void Game::removePlayer(QTcpSocket* socket) {
     socketToPlayer.remove(socket);
 
     if (socket == currentDrawer) {
-        endGame(currentWord.toUtf8());
+        endGame(currentWord);
     }
 }
 
@@ -80,7 +102,6 @@ void Game::parseMessage(QTcpSocket* socket, int code, QByteArray message) {
 }
 
 void Game::checkAnswer(QTcpSocket* socket, QString guess) {
-    qDebug() << (guess == currentWord ? "Right" : "Wrong");
 
     if (guess != currentWord) {
         server->sendMessage(socket, WrongAnswer);
@@ -88,7 +109,7 @@ void Game::checkAnswer(QTcpSocket* socket, QString guess) {
     }
 
     QString response = socketToPlayer[socket] + ":" + currentWord;
-    endGame(response.toUtf8());
+    endGame(response);
     // check input and call endGame
 }
 
@@ -104,16 +125,17 @@ void Game::updateImage(QByteArray &message) {
 }
 
 
-void Game::endGame(QByteArray gameResult) {
+void Game::endGame(QString gameResult) {
     isGameRunning = false;
 
-    foreach (auto socket, socketToPlayer.keys()) {
-        server->sendMessage(socket, GameEnded, gameResult);
+
+    if (socketToPlayer.count() > 1) {
+        restartGame(gameResult);
+        return;
     }
 
-//    QThread::sleep(5);
-    if (socketToPlayer.count() > 1) {
-        startGame();
+    foreach (auto socket, socketToPlayer.keys()) {
+        server->sendMessage(socket, GameEnded, gameResult.toUtf8());
     }
     // output winner and restart game
 }
