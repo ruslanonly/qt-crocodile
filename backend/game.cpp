@@ -44,7 +44,7 @@ void Game::removePlayer(QTcpSocket* socket) {
     socketToPlayer.remove(socket);
 
     if (socket == currentDrawer) {
-        endGame(QString("DRAWER LEFT. WORD WAS" + currentWord).toUtf8());
+        endGame(currentWord.toUtf8());
     }
 }
 
@@ -79,7 +79,7 @@ void Game::checkAnswer(QTcpSocket* socket, QString guess) {
         return;
     }
 
-    QString response = socketToPlayer[socket] + " " + currentWord;
+    QString response = socketToPlayer[socket] + ":" + currentWord;
     endGame(response.toUtf8());
     // check input and call endGame
 }

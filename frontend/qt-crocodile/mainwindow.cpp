@@ -121,11 +121,12 @@ void MainWindow::readSocket() {
         break;
     }
     case GameEnded:{//
-        ui->statusBarLabel->setText(QString(buffer));
+        ui->statusBarLabel->setText(QString(bArray));
 
     }
     case Drawer:{//
-        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(buffer));
+        qDebug() << QString(bArray);
+        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray));
         ui->graphicsView->scene()->clear();
 
         this->ui->graphicsView->setInteractive(true);
@@ -143,6 +144,7 @@ void MainWindow::readSocket() {
         break;
     }
     case WrongAnswer:{//
+        qDebug() << "WRONG";
         ui->statusBarLabel->setText("Слово неверное");
 
         break;
