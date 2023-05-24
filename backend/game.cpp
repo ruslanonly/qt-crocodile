@@ -74,7 +74,7 @@ void Game::removePlayer(QTcpSocket* socket) {
     socketToPlayer.remove(socket);
 
     if (socket == currentDrawer) {
-        endGame(currentWord);
+        endGame("Рисовальщик вышел!:" + currentWord);
     }
 }
 
@@ -115,7 +115,7 @@ void Game::checkAnswer(QTcpSocket* socket, QString guess) {
 
 void Game::updateImage(QByteArray &message) {
     currentImage = message;
-    qDebug() << socketToPlayer.count();
+    qDebug() << "Image update: " << currentImage.mid(0,32);
 
     foreach (auto socket, socketToPlayer.keys()) {
         if (socket == currentDrawer) continue;
