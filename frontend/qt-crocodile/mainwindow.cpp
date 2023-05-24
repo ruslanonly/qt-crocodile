@@ -124,18 +124,63 @@ void MainWindow::readSocket() {
         ui->statusBarLabel->setText("Игра начата");
         break;
     }
-    case GameEnded:{//
+//    case GameEnded:{//
+//        QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
+//                           .arg(QString(bArray).split(":")[0])
+//                           .arg(QString(bArray).split(":")[1]);
+////        QMessageBox* msgBox = new QMessageBox;
+////        msgBox->setText(text);
+////        msgBox->show();
+
+//        ui->statusBarLabel->setText(text);
+//        if (this->isDrawer)
+//        ui->wordInput->clear();
+//        break;
+//    }
+
+    case GameEndedDrawer: {
         QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
-                           .arg(QString(bArray).split(":")[0])
-                           .arg(QString(bArray).split(":")[1]);
-//        QMessageBox* msgBox = new QMessageBox;
-//        msgBox->setText(text);
-//        msgBox->show();
+                               .arg(QString(bArray).split(":")[0])
+                               .arg(QString(bArray).split(":")[1]);
+        QMessageBox* msgBox = new QMessageBox;
+        msgBox->setText(text);
+        msgBox->show();
 
-        ui->statusBarLabel->setText(text);
-        if (this->isDrawer)
+        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray).split(":")[2]);
+        this->ui->wordInput->setDisabled(true);
+        ui->wordInput->setText(wordToDraw);
+        ui->sendWordButton->hide();
+        this->isDrawer = true;
+
+        this->ui->graphicsView->setInteractive(true);
+
+        ui->graphicsView->scene()->clear();
+
+        break;
+    }
+
+    case GameEndedGuesser: {
+        QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
+                               .arg(QString(bArray).split(":")[0])
+                               .arg(QString(bArray).split(":")[1]);
+        QMessageBox* msgBox = new QMessageBox;
+        msgBox->setText(text);
+        msgBox->show();
+
+        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray).split(":")[2]);
+        ui->wordInput->setDisabled(false);
         ui->wordInput->clear();
+        ui->sendWordButton->show();
+        this->isDrawer = false;
 
+        QBuffer* buffer = new QBuffer(&bArray);
+        updateGraphicsView(buffer);
+
+        this->ui->graphicsView->setInteractive(false);
+
+        ui->graphicsView->scene()->clear();
+
+        break;
     }
 
     case Drawer:{//
