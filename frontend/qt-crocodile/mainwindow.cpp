@@ -215,8 +215,6 @@ void MainWindow::readSocket() {
         updateGraphicsView(buffer);
 
         this->ui->graphicsView->setInteractive(false);
-
-        ui->graphicsView->scene()->clear();
         break;
     }
     case WrongAnswer:{//
