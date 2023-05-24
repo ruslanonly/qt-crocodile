@@ -27,7 +27,9 @@ private:
         Drawer,
         Guesser,
         WrongAnswer,
-        SetNickname
+        SetNickname,
+        GameEndedDrawer,
+        GameEndedGuesser
     };
 
 public:
@@ -39,7 +41,8 @@ public:
     void parseMessage(QTcpSocket* socket, int code, QByteArray message);
     void removePlayer(QTcpSocket* socket);
     void checkAnswer(QTcpSocket* socket, QString guess);
-    void endGame(QByteArray gameResult);
+    void endGame(QString gameResult);
+    void restartGame(QString lastGameStatus);
 private:
     Server *server;
 
