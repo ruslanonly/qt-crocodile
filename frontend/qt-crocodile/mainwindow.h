@@ -26,12 +26,13 @@ public:
         Guess = 1,
         UpdateImage,
         GameStarted,
-        GameEndedDrawer,
-        GameEndedGuesser,
+        GameEnded,
         Drawer,
         Guesser,
         WrongAnswer,
-        SetNickname
+        SetNickname,
+        GameEndedDrawer,
+        GameEndedGuesser
     };
 
 public slots:

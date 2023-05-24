@@ -124,7 +124,7 @@ void MainWindow::readSocket() {
         ui->statusBarLabel->setText("Игра начата");
         break;
     }
-//    case GameEnded:{//
+    case GameEnded:{//
 //        QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
 //                           .arg(QString(bArray).split(":")[0])
 //                           .arg(QString(bArray).split(":")[1]);
@@ -136,7 +136,7 @@ void MainWindow::readSocket() {
 //        if (this->isDrawer)
 //        ui->wordInput->clear();
 //        break;
-//    }
+    }
 
     case GameEndedDrawer: {
         QString text = QString("Конец! Победитель - %1. Загаданное слово - %2")
@@ -146,7 +146,8 @@ void MainWindow::readSocket() {
         msgBox->setText(text);
         msgBox->show();
 
-        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray).split(":")[2]);
+        QString wordToDraw = QString(bArray).split(":")[2];
+        ui->statusBarLabel->setText("Игра начата. Слово: " + wordToDraw);
         this->ui->wordInput->setDisabled(true);
         ui->wordInput->setText(wordToDraw);
         ui->sendWordButton->hide();
@@ -167,7 +168,7 @@ void MainWindow::readSocket() {
         msgBox->setText(text);
         msgBox->show();
 
-        ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray).split(":")[2]);
+        ui->statusBarLabel->setText("Игра начата");
         ui->wordInput->setDisabled(false);
         ui->wordInput->clear();
         ui->sendWordButton->show();
@@ -184,7 +185,7 @@ void MainWindow::readSocket() {
     }
 
     case Drawer:{//
-        qDebug() << QString(bArray);
+
         ui->statusBarLabel->setText("Игра начата. Слово: " + QString(bArray));
         ui->graphicsView->scene()->clear();
 
